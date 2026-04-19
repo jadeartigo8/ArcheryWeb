@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Archery Club — Browse A101 Basic, A102 Intermediate, A103 Advanced classes and private lesson packages. View schedules, pricing, and book today." />
+  <title>Classes &amp; Programs | Archery Club</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23c9a84c' opacity='.15'/><line x1='4' y1='16' x2='28' y2='16' stroke='%23c9a84c' stroke-width='2.2' stroke-linecap='round'/><polygon points='24,11 28,16 24,21' fill='%23c9a84c'/><circle cx='16' cy='16' r='3' fill='none' stroke='%23c9a84c' stroke-width='1.5'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .filter-nav { background: var(--navy-mid); border-bottom: 1px solid var(--navy-border); position: sticky; top: 64px; z-index: 100; }
+    .filter-nav-inner { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    .filter-nav-inner::-webkit-scrollbar { display: none; }
+    .filter-tab { font-family: var(--font-body); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); padding: 1rem 1.5rem; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -1px; cursor: pointer; white-space: nowrap; transition: all var(--transition); }
+    .filter-tab:hover { color: var(--gold-light); }
+    .filter-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .program-section { padding: 5rem 0; }
+    .program-section + .program-section { border-top: 1px solid var(--navy-border); }
+    .program-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .program-icon-lg { width: 56px; height: 56px; border-radius: var(--radius-md); background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--gold); flex-shrink: 0; }
+    .program-header h2 { margin: 0; }
+    .program-header p { margin: 0; color: var(--text-muted); font-size: .9rem; }
+
+    .detail-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+
+    .schedule-table { width: 100%; border-collapse: collapse; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; }
+    .schedule-table thead { background: var(--navy-light); }
+    .schedule-table th { font-family: var(--font-body); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); padding: 1rem 1.1rem; text-align: left; }
+    .schedule-table tbody tr { border-bottom: 1px solid var(--navy-border); transition: background var(--transition); }
+    .schedule-table tbody tr:last-child { border-bottom: none; }
+    .schedule-table tbody tr:hover { background: var(--navy-light); }
+    .schedule-table td { padding: .9rem 1.1rem; font-size: .88rem; color: var(--text); vertical-align: middle; }
+    .schedule-table td:first-child { font-weight: 600; color: var(--text-dark); }
+    .level-badge { display: inline-block; font-family: var(--font-body); font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .2rem .65rem; border-radius: var(--radius-full); }
+    .level-beginner     { background: rgba(42,122,78,.2);  color: #5ecf8e; border: 1px solid rgba(42,122,78,.4); }
+    .level-intermediate { background: rgba(201,168,76,.15); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
+    .level-advanced     { background: rgba(150,80,40,.2);  color: #e09060; border: 1px solid rgba(150,80,40,.4); }
+    .price-strong { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--gold); }
+
+    .detail-list { display: flex; flex-direction: column; gap: .85rem; }
+    .detail-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-md); }
+    .detail-item i { color: var(--gold); font-size: .95rem; margin-top: 3px; width: 16px; flex-shrink: 0; }
+    .detail-item strong { display: block; font-size: .88rem; color: var(--text-dark); margin-bottom: 2px; }
+    .detail-item span { font-size: .82rem; color: var(--text-muted); }
+
+    .booking-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-top: 3px solid var(--gold); border-radius: var(--radius-xl); padding: 2rem; position: sticky; top: 120px; }
+    .booking-card h3 { color: var(--gold); margin-bottom: .4rem; font-size: 1.1rem; }
+    .booking-card > p { color: var(--text-muted); font-size: .86rem; margin-bottom: 1.5rem; }
+    .price-display { margin-bottom: 1.5rem; }
+    .price-display strong { font-family: var(--font-display); font-size: 2.4rem; color: var(--gold); }
+    .price-display span { font-size: .82rem; color: var(--text-muted); }
+    .booking-card .btn { width: 100%; justify-content: center; margin-bottom: .7rem; }
+    .booking-note { font-size: .75rem; color: var(--text-muted); text-align: center; margin-top: .5rem; }
+
+    .divider { border: none; border-top: 1px solid var(--navy-border); margin: 0; }
+
+    .private-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .private-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-top: 3px solid var(--navy-border); border-radius: var(--radius-lg); padding: 2rem; }
+    .private-card.featured { border-top-color: var(--gold); }
+    .private-card h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+    .private-card > p { font-size: .86rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .private-price strong { font-family: var(--font-display); font-size: 2rem; color: var(--gold); }
+    .private-price span { font-size: .84rem; color: var(--text-muted); }
+    .private-includes { display: flex; flex-direction: column; gap: .5rem; margin: 1.25rem 0 1.75rem; }
+    .private-includes li { display: flex; align-items: center; gap: .6rem; font-size: .86rem; color: var(--text); }
+    .private-includes li i { color: var(--gold); font-size: .8rem; }
+
+    .faq-section { padding: 5rem 0; background: var(--navy-mid); border-top: 1px solid var(--navy-border); }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    details { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-md); overflow: hidden; }
+    summary { font-family: var(--font-body); font-size: .93rem; font-weight: 600; color: var(--text-dark); padding: 1.2rem 1.5rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: color var(--transition); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '\002B'; font-size: 1.3rem; color: var(--gold); flex-shrink: 0; }
+    details[open] summary::after { content: '\2212'; }
+    details > p { padding: 0 1.5rem 1.25rem; font-size: .88rem; color: var(--text-muted); line-height: 1.75; }
+
+    @media (max-width: 860px) { .detail-grid { grid-template-columns: 1fr; } .booking-card { position: static; } .private-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header id="site-header" class="scrolled">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="Archery Club home">
+        <div class="nav-logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <circle cx="18" cy="18" r="16" stroke="#c9a84c" stroke-width="1.5" opacity=".3"/>
+            <circle cx="18" cy="18" r="10" stroke="#c9a84c" stroke-width="1.2" opacity=".5"/>
+            <circle cx="18" cy="18" r="4" fill="#c9a84c" opacity=".8"/>
+            <line x1="2" y1="18" x2="34" y2="18" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+            <polygon points="29,13 34,18 29,23" fill="#c9a84c"/>
+          </svg>
+        </div>
+        <div class="nav-logo-text">Archery Club<span>Est. 2005 · Tacoma, WA</span></div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="classes.html" class="active" aria-current="page">Classes</a></li>
+        <li><a href="instructors.html">Instructors</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Book a Lesson</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero" aria-label="Page hero">
+      <div class="container page-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span aria-current="page">Classes &amp; Programs</span></nav>
+        <h1>Classes &amp; Programs</h1>
+        <p>From your first arrow to tournament competition — find the program that fits your goals, schedule, and skill level.</p>
+      </div>
+    </section>
+
+    <nav class="filter-nav" aria-label="Jump to program">
+      <div class="filter-nav-inner">
+        <button class="filter-tab active" data-target="a101">A101 Basic</button>
+        <button class="filter-tab" data-target="a102">A102 Intermediate</button>
+        <button class="filter-tab" data-target="a103">A103 Advanced</button>
+        <button class="filter-tab" data-target="private">Private Lessons</button>
+        <button class="filter-tab" data-target="faq">FAQ</button>
+      </div>
+    </nav>
+
+    <!-- A101 -->
+    <section class="program-section" id="a101" aria-labelledby="a101-heading">
+      <div class="container">
+        <div class="program-header">
+          <div class="program-icon-lg" aria-hidden="true"><i class="fa-solid fa-seedling"></i></div>
+          <div>
+            <h2 id="a101-heading">A101 Basic Archery</h2>
+            <p>The perfect starting point for anyone new to the sport</p>
+          </div>
+        </div>
+        <div class="detail-grid">
+          <div>
+            <p style="color:var(--text-muted);margin-bottom:2rem;line-height:1.85;">A101 is a beginner archery course focused on safety, foundational skills, and shooting drills. Students learn archery form, range rules, and etiquette through guided instruction and fun games. All equipment is provided — students must bring their own safety kit.</p>
+            <table class="schedule-table" aria-label="A101 schedule">
+              <thead><tr><th>Days</th><th>Time</th><th>Level</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr><td>Mondays &amp; Wednesdays</td><td>4:00 – 5:00 pm</td><td><span class="level-badge level-beginner">Beginner</span></td><td><span class="price-strong">$120/mo</span></td></tr>
+              </tbody>
+            </table>
+            <div class="detail-list">
+              <div class="detail-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><div><strong>Safety First</strong><span>Begins with complete range safety instruction and proper archery etiquette</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-person-walking" aria-hidden="true"></i><div><strong>Form Training</strong><span>Detailed coaching on stance, grip, anchor point, and release fundamentals</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><div><strong>Fun Games</strong><span>Skill-building through structured games that reinforce technique while keeping it enjoyable</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-box-open" aria-hidden="true"></i><div><strong>Equipment Included</strong><span>All bows and arrows provided — students need to bring their own safety kit</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-child" aria-hidden="true"></i><div><strong>Minimum Age</strong><span>Age 8+, or age 7 with a pre-enrollment evaluation</span></div></div>
+            </div>
+          </div>
+          <div class="booking-card">
+            <h3>Enroll in A101</h3>
+            <p>Monthly group class — new students welcome each month.</p>
+            <div class="price-display"><strong>$120</strong><span>/ month</span></div>
+            <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Book Your Spot</a>
+            <a href="contact.html" class="btn btn-outline-light">Ask a Question</a>
+            <p class="booking-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Safety kit not included — contact us for details</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- A102 -->
+    <section class="program-section" id="a102" aria-labelledby="a102-heading">
+      <div class="container">
+        <div class="program-header">
+          <div class="program-icon-lg" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></div>
+          <div>
+            <h2 id="a102-heading">A102 Intermediate Archery</h2>
+            <p>Expand your skills with new equipment and techniques</p>
+          </div>
+        </div>
+        <div class="detail-grid">
+          <div>
+            <p style="color:var(--text-muted);margin-bottom:2rem;line-height:1.85;">A102 builds on A101 fundamentals, introducing recurve and compound bow styles alongside form reinforcement and fun skill-building games. Intermediate safety techniques are emphasized throughout. All equipment is provided — students must bring their own safety kit.</p>
+            <table class="schedule-table" aria-label="A102 schedule">
+              <thead><tr><th>Days</th><th>Time</th><th>Level</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr><td>Tuesdays &amp; Thursdays</td><td>4:00 – 5:00 pm</td><td><span class="level-badge level-intermediate">Intermediate</span></td><td><span class="price-strong">$120/mo</span></td></tr>
+              </tbody>
+            </table>
+            <div class="detail-list">
+              <div class="detail-item"><i class="fa-solid fa-arrows-to-circle" aria-hidden="true"></i><div><strong>New Equipment Styles</strong><span>Introduction to recurve and compound bows alongside the basics</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-rotate" aria-hidden="true"></i><div><strong>Form Reinforcement</strong><span>Emphasis on refining technique and correcting habits developed in A101</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-certificate" aria-hidden="true"></i><div><strong>Prerequisite</strong><span>A101 completion, or recommendation from a private lesson instructor</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-child" aria-hidden="true"></i><div><strong>Minimum Age</strong><span>Age 7+</span></div></div>
+            </div>
+          </div>
+          <div class="booking-card">
+            <h3>Enroll in A102</h3>
+            <p>Prerequisite: A101 or instructor recommendation.</p>
+            <div class="price-display"><strong>$120</strong><span>/ month</span></div>
+            <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Book Your Spot</a>
+            <a href="contact.html" class="btn btn-outline-light">Ask a Question</a>
+            <p class="booking-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> A101 completion required</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- A103 -->
+    <section class="program-section" id="a103" aria-labelledby="a103-heading">
+      <div class="container">
+        <div class="program-header">
+          <div class="program-icon-lg" aria-hidden="true"><i class="fa-solid fa-trophy"></i></div>
+          <div>
+            <h2 id="a103-heading">A103 Advanced Archery</h2>
+            <p>Tournament-level technique and personal equipment guidance</p>
+          </div>
+        </div>
+        <div class="detail-grid">
+          <div>
+            <p style="color:var(--text-muted);margin-bottom:2rem;line-height:1.85;">A103 is for archers who have completed A101 and A102 and are ready to pursue competitive shooting. The class covers tournament-style techniques used by major archery associations worldwide, with ongoing form coaching and personal equipment selection advice. All equipment is provided — students must bring their own safety kit.</p>
+            <table class="schedule-table" aria-label="A103 schedule">
+              <thead><tr><th>Days</th><th>Time</th><th>Level</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr><td>Tuesdays &amp; Thursdays</td><td>5:00 – 6:00 pm</td><td><span class="level-badge level-advanced">Advanced</span></td><td><span class="price-strong">$120/mo</span></td></tr>
+              </tbody>
+            </table>
+            <div class="detail-list">
+              <div class="detail-item"><i class="fa-solid fa-medal" aria-hidden="true"></i><div><strong>Tournament Techniques</strong><span>Shooting styles recognized by USA Archery, WSAA, NFAA, and other major associations</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><div><strong>Ongoing Form Coaching</strong><span>Regular individual feedback and technical video analysis</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-wrench" aria-hidden="true"></i><div><strong>Equipment Guidance</strong><span>Personalized advice on selecting and tuning your own equipment</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-certificate" aria-hidden="true"></i><div><strong>Prerequisite</strong><span>A101 &amp; A102 completion, or equivalent verified experience</span></div></div>
+              <div class="detail-item"><i class="fa-solid fa-child" aria-hidden="true"></i><div><strong>Minimum Age</strong><span>Age 7+</span></div></div>
+            </div>
+          </div>
+          <div class="booking-card">
+            <h3>Enroll in A103</h3>
+            <p>Prerequisite: A101 &amp; A102 or equivalent.</p>
+            <div class="price-display"><strong>$120</strong><span>/ month</span></div>
+            <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Book Your Spot</a>
+            <a href="contact.html" class="btn btn-outline-light">Ask a Question</a>
+            <p class="booking-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> A101 &amp; A102 required</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- PRIVATE LESSONS -->
+    <section class="program-section" id="private" aria-labelledby="private-heading" style="background:var(--navy-mid);">
+      <div class="container">
+        <div class="text-center" style="margin-bottom:3rem;">
+          <span class="section-label" aria-hidden="true">One-on-One Coaching</span>
+          <h2 id="private-heading" class="section-title">Private Lessons</h2>
+          <p class="section-sub">Expert 1-on-1 guidance from a USA Archery-certified coach, fully tailored to your goals and schedule.</p>
+        </div>
+        <div class="private-grid">
+          <div class="private-card">
+            <h3>Single Lesson</h3>
+            <p>One dedicated hour of expert coaching — ideal for trying private instruction or targeting a specific skill.</p>
+            <div class="private-price"><strong>$50</strong><span> / session</span></div>
+            <ul class="private-includes">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> 1 hour with a certified coach</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> All equipment provided</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Personalized feedback</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Flexible scheduling</li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline">Book a Session</a>
+          </div>
+          <div class="private-card featured">
+            <h3>3-Lesson Package</h3>
+            <p>Three 1-hour sessions to build momentum and track measurable improvement over multiple weeks.</p>
+            <div class="private-price"><strong>$140</strong><span> / package</span></div>
+            <ul class="private-includes">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> 3 × 1-hour sessions</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Same certified coach throughout</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Progress tracking between sessions</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Equipment included</li>
+            </ul>
+            <a href="contact.html" class="btn btn-primary">Book Package</a>
+          </div>
+          <div class="private-card">
+            <h3>10-Lesson Package</h3>
+            <p>Ten 1-hour sessions for serious, long-term skill development with a dedicated certified coach.</p>
+            <div class="private-price"><strong>$380</strong><span> / package</span></div>
+            <ul class="private-includes">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> 10 × 1-hour sessions</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Best value per lesson ($38)</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Full progress plan &amp; review</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Equipment &amp; video analysis</li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline">Book Package</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label" aria-hidden="true">Common Questions</span>
+          <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+          <p class="section-sub">Everything you need to know before your first session.</p>
+        </div>
+        <div class="faq-list">
+          <details><summary>Do I need my own equipment?</summary><p>No — all bows, arrows, arm guards, and finger tabs are included in every class and lesson fee. You will need to bring your own safety kit. Contact us for details on what the safety kit includes and where to purchase one.</p></details>
+          <details><summary>What is the safety kit and where do I get one?</summary><p>The safety kit includes personal protective gear required for all participants. Please reach out before your first class and we'll point you to where to get one locally or online.</p></details>
+          <details><summary>Do I need to take A101 before A102?</summary><p>Yes — A101 is the prerequisite for A102. The exception is if you receive a direct recommendation from one of our private lesson instructors, who can assess your existing skill level. A102 and A103 both require verified prior experience.</p></details>
+          <details><summary>What is the minimum age for classes?</summary><p>A101 starts at age 8 (age 7 with a pre-enrollment evaluation). A102 and A103 are open from age 7. Private lessons are available for all ages — please contact us to discuss the right fit for younger students.</p></details>
+          <details><summary>Can someone with a disability participate?</summary><p>Absolutely. Our facility is fully accessible and we have specific adaptive equipment available. Please contact us in advance so we can prepare the right setup for your first visit.</p></details>
+          <details><summary>What should I wear?</summary><p>Comfortable, close-toed shoes and form-fitting clothing on your bow arm — loose sleeves can catch the bowstring. Avoid dangling jewelry. That's it!</p></details>
+          <details><summary>What is your cancellation policy?</summary><p>Cancel at least 24 hours before your session for a full credit toward a future booking. Within 24 hours, sessions are non-refundable, but we'll do our best to reschedule if there's an emergency — just call us directly.</p></details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <circle cx="18" cy="18" r="16" stroke="#c9a84c" stroke-width="1.5" opacity=".3"/>
+                <circle cx="18" cy="18" r="10" stroke="#c9a84c" stroke-width="1.2" opacity=".5"/>
+                <circle cx="18" cy="18" r="4" fill="#c9a84c" opacity=".8"/>
+                <line x1="2" y1="18" x2="34" y2="18" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+                <polygon points="29,13 34,18 29,23" fill="#c9a84c"/>
+              </svg>
+            </div>
+            <div class="nav-logo-text">Archery Club<span>Est. 2005 · Tacoma, WA</span></div>
+          </a>
+          <p>Tacoma's home for archery education — from beginner to champion.</p>
+          <ul class="footer-social" role="list"><li><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li><li><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li><li><a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li></ul>
+        </div>
+        <nav aria-label="Quick links"><div class="footer-col"><h4>Quick Links</h4><ul class="footer-links" role="list"><li><a href="index.html">Home</a></li><li><a href="classes.html">Classes</a></li><li><a href="instructors.html">Instructors</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+        <nav aria-label="Programs"><div class="footer-col"><h4>Programs</h4><ul class="footer-links" role="list"><li><a href="#a101">A101 Basic</a></li><li><a href="#a102">A102 Intermediate</a></li><li><a href="#a103">A103 Advanced</a></li><li><a href="#private">Private Lessons</a></li></ul></div></nav>
+        <div class="footer-col"><h4>Visit Us</h4><ul class="footer-links" role="list"><li style="color:var(--text-muted);font-size:.85rem;">528 Nock Point Ln<br>Tacoma, WA 98412</li><li><a href="tel:+12535551010"><i class="fa-solid fa-phone" style="color:var(--gold);margin-right:6px;"></i>(253) 555-1010</a></li><li><a href="mailto:archery-education@example.com"><i class="fa-solid fa-envelope" style="color:var(--gold);margin-right:6px;"></i>archery-education@example.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Archery Club. All rights reserved.</p><div style="display:flex;gap:1.5rem;"><a href="#">Privacy Policy</a><a href="#">Accessibility</a></div></div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { const o = navLinks.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(o)); document.body.style.overflow = o ? 'hidden' : ''; });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }));
+    document.querySelectorAll('.filter-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active')); tab.classList.add('active'); const target = document.getElementById(tab.dataset.target); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
+  </script>
+</body>
+</html>

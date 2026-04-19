@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Archery Club — founded in 2005 by Giap Nguyen in Tacoma, WA. Our story, mission, facility, and the values that guide our teaching." />
+  <title>About Us | Archery Club</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23c9a84c' opacity='.15'/><line x1='4' y1='16' x2='28' y2='16' stroke='%23c9a84c' stroke-width='2.2' stroke-linecap='round'/><polygon points='24,11 28,16 24,21' fill='%23c9a84c'/><circle cx='16' cy='16' r='3' fill='none' stroke='%23c9a84c' stroke-width='1.5'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ORIGIN */
+    .origin-section { padding: 6rem 0; }
+    .origin-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .origin-photo { position: relative; }
+    .origin-photo-main { width: 100%; height: 360px; background: linear-gradient(135deg, var(--navy-light), var(--navy-mid)); border: 1px solid var(--navy-border); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .origin-photo-main .origin-icon { font-size: 6rem; color: rgba(201,168,76,.12); position: absolute; right: 2rem; bottom: 1rem; }
+    .origin-photo-main .origin-icon-main { color: rgba(201,168,76,.18); }
+    .origin-year-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; width: 96px; height: 96px; border-radius: 50%; background: var(--gold); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); }
+    .origin-year-badge strong { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--navy); line-height: 1; }
+    .origin-year-badge span { font-family: var(--font-body); font-size: .56rem; font-weight: 700; color: var(--navy-mid); letter-spacing: .08em; text-transform: uppercase; }
+    .origin-text h2 { margin-bottom: 1.25rem; }
+    .origin-text p { color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.85; }
+
+    /* QUOTE */
+    .founder-quote-section { background: var(--navy-mid); border-top: 1px solid var(--navy-border); border-bottom: 1px solid var(--navy-border); padding: 5rem 0; text-align: center; }
+    .quote-body { font-family: var(--font-accent); font-size: clamp(1.15rem, 2.5vw, 1.55rem); font-style: italic; color: var(--text-dark); max-width: 760px; margin: 0 auto 1.75rem; line-height: 1.7; position: relative; }
+    .quote-body::before { content: '\201C'; font-size: 5rem; color: rgba(201,168,76,.25); line-height: 0; vertical-align: -.5em; margin-right: .1em; }
+    .quote-body::after  { content: '\201D'; font-size: 5rem; color: rgba(201,168,76,.25); line-height: 0; vertical-align: -.5em; margin-left: .1em; }
+    .founder-info { display: inline-flex; align-items: center; gap: 1rem; margin-top: 1.25rem; padding: .9rem 1.5rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-full); }
+    .founder-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--navy-light); border: 2px solid var(--navy-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; font-size: .95rem; color: var(--gold); }
+    .founder-details strong { display: block; font-family: var(--font-body); font-size: .88rem; font-weight: 700; color: var(--text-dark); }
+    .founder-details span { font-size: .76rem; color: var(--text-muted); }
+
+    /* MISSION */
+    .mission-section { padding: 6rem 0; background: var(--navy); }
+    .mission-lead { font-size: 1.05rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 4rem; text-align: center; line-height: 1.85; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .value-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 2rem; text-align: center; transition: border-color var(--transition); }
+    .value-card:hover { border-color: var(--gold-dim); }
+    .value-icon { width: 58px; height: 58px; margin: 0 auto 1.25rem; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.2); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--gold); }
+    .value-card h3 { color: var(--text-dark); font-size: 1.05rem; margin-bottom: .75rem; }
+    .value-card p { color: var(--text-muted); font-size: .87rem; line-height: 1.7; margin: 0; }
+
+    /* FACILITY */
+    .facility-section { padding: 6rem 0; background: var(--navy-mid); border-top: 1px solid var(--navy-border); border-bottom: 1px solid var(--navy-border); }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 3rem; }
+    .service-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; transition: border-color var(--transition), transform var(--transition); }
+    .service-card:hover { transform: translateY(-3px); border-color: var(--gold-dim); }
+    .service-card-icon { width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.2); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--gold); }
+    .service-card h4 { font-size: .92rem; color: var(--text-dark); margin-bottom: .5rem; }
+    .service-card p { font-size: .8rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+    /* ASSOCIATIONS */
+    .assoc-section { padding: 6rem 0; background: var(--navy); border-top: 1px solid var(--navy-border); }
+    .assoc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 3rem; }
+    .assoc-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 1.5rem 1rem; text-align: center; }
+    .assoc-card i { font-size: 1.5rem; color: var(--gold); margin-bottom: .75rem; display: block; }
+    .assoc-card strong { display: block; font-family: var(--font-display); font-size: .8rem; color: var(--text-dark); margin-bottom: .3rem; }
+    .assoc-card span { font-size: .72rem; color: var(--text-muted); }
+
+    /* NONDISCRIMINATION */
+    .nondiscrim-section { padding: 5rem 0; background: var(--navy-mid); border-top: 1px solid var(--navy-border); border-bottom: 1px solid var(--navy-border); }
+    .nondiscrim-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+    .nondiscrim-inner h2 { margin-bottom: 1.25rem; }
+    .nondiscrim-inner p { color: var(--text-muted); font-size: .95rem; line-height: 1.9; }
+
+    /* CTA */
+    .about-cta { padding: 6rem 0; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); border-top: 1px solid var(--navy-border); text-align: center; }
+    .about-cta h2 { color: var(--white); margin-bottom: 1rem; }
+    .about-cta p { color: rgba(255,255,255,.6); max-width: 520px; margin: 0 auto 2rem; font-size: .95rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 860px) { .origin-layout { grid-template-columns: 1fr; gap: 3rem; } .values-grid { grid-template-columns: 1fr 1fr; } .services-grid { grid-template-columns: 1fr 1fr; } .assoc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .values-grid, .services-grid, .assoc-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header id="site-header" class="scrolled">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="Archery Club home">
+        <div class="nav-logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <circle cx="18" cy="18" r="16" stroke="#c9a84c" stroke-width="1.5" opacity=".3"/>
+            <circle cx="18" cy="18" r="10" stroke="#c9a84c" stroke-width="1.2" opacity=".5"/>
+            <circle cx="18" cy="18" r="4" fill="#c9a84c" opacity=".8"/>
+            <line x1="2" y1="18" x2="34" y2="18" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+            <polygon points="29,13 34,18 29,23" fill="#c9a84c"/>
+          </svg>
+        </div>
+        <div class="nav-logo-text">Archery Club<span>Est. 2005 · Tacoma, WA</span></div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="classes.html">Classes</a></li>
+        <li><a href="instructors.html">Instructors</a></li>
+        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Book a Lesson</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero" aria-label="Page hero">
+      <div class="container page-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span aria-current="page">About Us</span></nav>
+        <h1>About Archery Club</h1>
+        <p>A non-profit archery education center founded in 2005 — where beginners become champions and community is our greatest achievement.</p>
+      </div>
+    </section>
+
+    <!-- ORIGIN -->
+    <section class="origin-section" aria-labelledby="origin-heading">
+      <div class="container">
+        <div class="origin-layout">
+          <div class="origin-photo">
+            <div class="origin-photo-main" aria-hidden="true">
+              <i class="fa-solid fa-bullseye origin-icon origin-icon-main" style="font-size:9rem;"></i>
+            </div>
+            <div class="origin-year-badge" aria-label="Founded in 2005">
+              <strong>2005</strong>
+              <span>Founded</span>
+            </div>
+          </div>
+          <div class="origin-text">
+            <span class="section-label" aria-hidden="true">Our Beginning</span>
+            <h2 id="origin-heading">Founded on Passion, Built on Community</h2>
+            <p>Archery Club is a non-profit archery education center founded in 2005 by Giap Nguyen in Tacoma, Washington. What began as a vision for accessible, expert archery education has grown into one of the Pacific Northwest's most respected facilities — serving everyone from first-time archers to professional competitors.</p>
+            <p>Our state-of-the-art facility combines detailed technical video analysis with generations of archery experience from certified coaches and instructors. We believe that archery teaches far more than accuracy — it builds focus, discipline, patience, and confidence that extend far beyond the range.</p>
+            <p>As a non-profit, every decision we make is driven by our community, not by profit. We exist to make great archery education accessible to everyone in Tacoma and beyond.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDER QUOTE -->
+    <section class="founder-quote-section" aria-labelledby="quote-heading">
+      <div class="container">
+        <span class="section-label" id="quote-heading" aria-hidden="true">From Our Founder</span>
+        <p class="quote-body">We are dedicated to teaching valuable life skills to the youth in our community through the wonderful discipline of archery.</p>
+        <div class="founder-info">
+          <div class="founder-avatar" aria-hidden="true">GN</div>
+          <div class="founder-details">
+            <strong>Giap Nguyen</strong>
+            <span>Founder &amp; Owner, Archery Club</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION & VALUES -->
+    <section class="mission-section" id="mission" aria-labelledby="mission-heading">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label" aria-hidden="true">What Drives Us</span>
+          <h2 id="mission-heading" class="section-title">Mission &amp; Values</h2>
+        </div>
+        <p class="mission-lead">We teach in a positive learning environment with instructors who hold extensive knowledge of advanced archery equipment and all forms of archery — from the traditional longbow to the modern compound bow. Our mission is simple: help every archer reach their potential.</p>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Safety First</h3>
+            <p>Every session starts with range safety. Our USA Archery-certified instructors meet rigorous safety qualifications and instill safe habits that last a lifetime.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-heart"></i></div>
+            <h3>Community</h3>
+            <p>As a non-profit, we are genuinely invested in the Tacoma community. We partner with schools, the YMCA, Boy and Girl Scouts, and other youth organizations to bring archery to more people.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></div>
+            <h3>Inclusion</h3>
+            <p>We welcome archers of all ages, abilities, backgrounds, and experience levels. From beginner to elite, and from recreational to competitive — everyone belongs here.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>Education</h3>
+            <p>Our instructors combine detailed technical video analysis with deep personal experience to give every student the clearest, most effective path to improvement.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></div>
+            <h3>Excellence</h3>
+            <p>We maintain strong connections with USA Archery, WSAA, NFAA, and other associations — ensuring our coaching standards remain at the highest level.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-seedling"></i></div>
+            <h3>Youth Development</h3>
+            <p>We are dedicated to teaching valuable life skills — focus, patience, discipline, and resilience — to young people in our community through the sport of archery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACILITY -->
+    <section class="facility-section" id="facility" aria-labelledby="facility-heading">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label" aria-hidden="true">Our Range</span>
+          <h2 id="facility-heading" class="section-title">The Facility &amp; Services</h2>
+          <p class="section-sub">A state-of-the-art indoor and outdoor training center with everything you need under one roof.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-building"></i></div>
+            <h4>14 Ten-Yard Lanes</h4>
+            <p>Climate-controlled indoor range with 14 ten-yard lanes — perfect for beginners and form work.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-arrows-left-right"></i></div>
+            <h4>14 Twenty-Yard Lanes</h4>
+            <p>14 additional indoor twenty-yard lanes for intermediate and advanced shooting practice.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></div>
+            <h4>26 Extra Indoor Lanes</h4>
+            <p>Access to 26 additional twenty-yard lanes for high-volume training days and events.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-sun"></i></div>
+            <h4>Outdoor Shooting Field</h4>
+            <p>Full outdoor field access for field archery, long-distance practice, and bowhunting training.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-door-closed"></i></div>
+            <h4>2 Private Coaching Rooms</h4>
+            <p>Dedicated private coaching rooms for 1-on-1 instruction, video analysis, and equipment fitting.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-video"></i></div>
+            <h4>Technical Video Analysis</h4>
+            <p>State-of-the-art video analysis tools used by coaches to provide detailed form feedback.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-wheelchair"></i></div>
+            <h4>Fully Accessible</h4>
+            <p>Wheelchair-accessible lanes, parking, restrooms, and adaptive equipment available on request.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-icon" aria-hidden="true"><i class="fa-solid fa-box-open"></i></div>
+            <h4>Equipment Provided</h4>
+            <p>All bows and arrows provided for classes — from beginner recurves to advanced compounds.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSOCIATIONS -->
+    <section class="assoc-section" aria-labelledby="assoc-heading">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-label" aria-hidden="true">Our Partners</span>
+          <h2 id="assoc-heading" class="section-title">Association Affiliations</h2>
+          <p class="section-sub">Our connections with leading national and state archery organizations ensure the highest standards of instruction and safety.</p>
+        </div>
+        <div class="assoc-grid">
+          <div class="assoc-card">
+            <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+            <strong>USAA</strong>
+            <span>USA Archery</span>
+          </div>
+          <div class="assoc-card">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <strong>WSAA</strong>
+            <span>WA State Archery Assoc.</span>
+          </div>
+          <div class="assoc-card">
+            <i class="fa-solid fa-tree" aria-hidden="true"></i>
+            <strong>WSB</strong>
+            <span>Washington State Bowhunters</span>
+          </div>
+          <div class="assoc-card">
+            <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+            <strong>NFAA</strong>
+            <span>National Field Archery Assoc.</span>
+          </div>
+          <div class="assoc-card">
+            <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+            <strong>More</strong>
+            <span>Multiple state &amp; national partners</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NONDISCRIMINATION POLICY -->
+    <section class="nondiscrim-section" aria-labelledby="nondiscrim-heading">
+      <div class="container">
+        <div class="nondiscrim-inner">
+          <span class="section-label" aria-hidden="true">Our Commitment</span>
+          <h2 id="nondiscrim-heading">Nondiscriminatory Policy</h2>
+          <p>Archery Club admits students of any race, gender presentation, sexuality, religion, national origin, or ethnic origin to all rights, privileges, programs, and activities available at our center. We do not discriminate in administering our educational policies, admission policies, or other center-administered programs. All students are welcome and valuable members of our community.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta" aria-labelledby="about-cta-heading">
+      <div class="container">
+        <h2 id="about-cta-heading">Ready to Become Part of Our Story?</h2>
+        <p>Join the hundreds of archers who have found their focus, confidence, and community at Archery Club.</p>
+        <div class="cta-btns">
+          <a href="classes.html" class="btn btn-primary"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Browse Classes</a>
+          <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <circle cx="18" cy="18" r="16" stroke="#c9a84c" stroke-width="1.5" opacity=".3"/>
+                <circle cx="18" cy="18" r="10" stroke="#c9a84c" stroke-width="1.2" opacity=".5"/>
+                <circle cx="18" cy="18" r="4" fill="#c9a84c" opacity=".8"/>
+                <line x1="2" y1="18" x2="34" y2="18" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+                <polygon points="29,13 34,18 29,23" fill="#c9a84c"/>
+              </svg>
+            </div>
+            <div class="nav-logo-text">Archery Club<span>Est. 2005 · Tacoma, WA</span></div>
+          </a>
+          <p>Tacoma's home for archery education — from beginner to champion.</p>
+          <ul class="footer-social" role="list"><li><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li><li><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li><li><a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li></ul>
+        </div>
+        <nav aria-label="Quick links"><div class="footer-col"><h4>Quick Links</h4><ul class="footer-links" role="list"><li><a href="index.html">Home</a></li><li><a href="classes.html">Classes</a></li><li><a href="instructors.html">Instructors</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+        <nav aria-label="About sections"><div class="footer-col"><h4>About</h4><ul class="footer-links" role="list"><li><a href="#mission">Mission &amp; Values</a></li><li><a href="#facility">Facility</a></li><li><a href="#nondiscrim-heading">Our Policy</a></li></ul></div></nav>
+        <div class="footer-col"><h4>Visit Us</h4><ul class="footer-links" role="list"><li style="color:var(--text-muted);font-size:.85rem;">528 Nock Point Ln<br>Tacoma, WA 98412</li><li><a href="tel:+12535551010"><i class="fa-solid fa-phone" style="color:var(--gold);margin-right:6px;"></i>(253) 555-1010</a></li><li><a href="mailto:archery-education@example.com"><i class="fa-solid fa-envelope" style="color:var(--gold);margin-right:6px;"></i>archery-education@example.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Archery Club. All rights reserved.</p><div style="display:flex;gap:1.5rem;"><a href="#">Privacy Policy</a><a href="#">Accessibility</a></div></div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { const o = navLinks.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(o)); document.body.style.overflow = o ? 'hidden' : ''; });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }));
+  </script>
+</body>
+</html>
